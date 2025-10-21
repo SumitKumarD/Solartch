@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarTech - Premium Solar Panels</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2c7873;
+            --secondary: #6fb98f;
+            --accent: #ff9a00;
+            --dark: #004445;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 0;
+            display: none;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        #home {
+            background: linear-gradient(rgba(0, 68, 69, 0.8), rgba(0, 68, 69, 0.8)), url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #home h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 1s ease-in;
+        }
+
+        #home p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #e68a00;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Products Section */
+        #products h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark);
+            font-size: 2.5rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-img {
+            height: 200px;
+            background-color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .product-info p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-features li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .product-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* About Section */
+        #about {
+            background-color: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            font-size: 2.5rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+
+        .about-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: var(--light);
+        }
+
+        #contact h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--dark);
+            font-size: 2.5rem;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: var(--accent);
+        }
+
+        .copyright {
+            margin-top: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+
+            #home h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Solar<span>Tech</span></div>
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link active" data-target="home">Home</a></li>
+                    <li><a href="#products" class="nav-link" data-target="products">Products</a></li>
+                    <li><a href="#about" class="nav-link" data-target="about">About</a></li>
+                    <li><a href="#contact" class="nav-link" data-target="contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="active">
+        <div class="container">
+            <h1>Power Your Future With Solar Energy</h1>
+            <p>High-efficiency solar panels for residential and commercial use. Reduce your energy bills and carbon footprint with our premium solar solutions.</p>
+            <a href="#products" class="btn nav-link" data-target="products">Explore Products</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products">
+        <div class="container">
+            <h2>Our Solar Panel Products</h2>
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-img">150W Panel</div>
+                    <div class="product-info">
+                        <h3>150 Watt Solar Panel</h3>
+                        <p>Perfect for small applications, RVs, boats, and backup power.</p>
+                        <ul class="product-features">
+                            <li>High efficiency monocrystalline cells</li>
+                            <li>Weather resistant frame</li>
+                            <li>Easy installation</li>
+                            <li>25-year performance warranty</li>
+                        </ul>
+                        <div class="price">$199.99</div>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-img">330W Panel</div>
+                    <div class="product-info">
+                        <h3>330 Watt Solar Panel</h3>
+                        <p>Ideal for residential use, providing excellent power output for homes.</p>
+                        <ul class="product-features">
+                            <li>Advanced PERC technology</li>
+                            <li>Anti-reflective coating</li>
+                            <li>Corrosion-resistant aluminum frame</li>
+                            <li>30-year linear power warranty</li>
+                        </ul>
+                        <div class="price">$349.99</div>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-img">450W Panel</div>
+                    <div class="product-info">
+                        <h3>450 Watt Solar Panel</h3>
+                        <p>High-performance panel for maximum energy production in limited spaces.</p>
+                        <ul class="product-features">
+                            <li>Half-cut cell technology</li>
+                            <li>Enhanced low-light performance</li>
+                            <li>PID resistant</li>
+                            <li>30-year product warranty</li>
+                        </ul>
+                        <div class="price">$499.99</div>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-img">500W Panel</div>
+                    <div class="product-info">
+                        <h3>500 Watt Solar Panel</h3>
+                        <p>Our premium commercial-grade panel for maximum efficiency and durability.</p>
+                        <ul class="product-features">
+                            <li>Bifacial technology</li>
+                            <li>Multi-busbar design</li>
+                            <li>Salt mist and ammonia resistant</li>
+                            <li>35-year performance warranty</li>
+                        </ul>
+                        <div class="price">$599.99</div>
+                        <button class="btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About SolarTech</h2>
+                    <p>Founded in 2010, SolarTech has been at the forefront of solar energy innovation, providing high-quality, efficient solar solutions to thousands of satisfied customers worldwide.</p>
+                    <p>Our mission is to make clean, renewable energy accessible to everyone. We believe in a sustainable future powered by the sun, and we're committed to developing products that help reduce our carbon footprint while saving our customers money.</p>
+                    <p>With over a decade of experience in the solar industry, our team of engineers and technicians continuously works to improve panel efficiency and durability, ensuring our products meet the highest standards of quality and performance.</p>
+                    <a href="#contact" class="btn nav-link" data-target="contact">Get in Touch</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1564053489984-317bbd824340?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="SolarTech team">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h3>Our Location</h3>
+                            <p>123 Solar Avenue, Sunnyvale, CA 94085</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <h3>Phone Number</h3>
+                            <p>+1 (800) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <h3>Email Address</h3>
+                            <p>info@solartech.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🕒</div>
+                        <div>
+                            <h3>Working Hours</h3>
+                            <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                            <p>Saturday: 10:00 AM - 4:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">Solar<span>Tech</span></div>
+                <ul class="footer-links">
+                    <li><a href="#home" class="nav-link" data-target="home">Home</a></li>
+                    <li><a href="#products" class="nav-link" data-target="products">Products</a></li>
+                    <li><a href="#about" class="nav-link" data-target="about">About</a></li>
+                    <li><a href="#contact" class="nav-link" data-target="contact">Contact</a></li>
+                </ul>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">f</a>
+                    <a href="#" class="social-icon">t</a>
+                    <a href="#" class="social-icon">in</a>
+                    <a href="#" class="social-icon">ig</a>
+                </div>
+                <div class="copyright">
+                    &copy; 2023 SolarTech. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+            const hamburger = document.querySelector('.hamburger');
+            const navLinksContainer = document.querySelector('.nav-links');
+            
+            // Function to show the selected section and hide others
+            function showSection(targetId) {
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                document.getElementById(targetId).classList.add('active');
+                
+                // Update active nav link
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-target') === targetId) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                // Close mobile menu if open
+                navLinksContainer.classList.remove('active');
+            }
+            
+            // Add click event to all navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('data-target');
+                    showSection(targetId);
+                    
+                    // Scroll to top of the page
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Hamburger menu toggle for mobile
+            hamburger.addEventListener('click', function() {
+                navLinksContainer.classList.toggle('active');
+            });
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your message! We will get back to you soon.');
+                    contactForm.reset();
+                });
+            }
+            
+            // Add to cart functionality
+            const addToCartButtons = document.querySelectorAll('.product-card .btn');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productName = this.closest('.product-card').querySelector('h3').textContent;
+                    alert(`${productName} has been added to your cart!`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
